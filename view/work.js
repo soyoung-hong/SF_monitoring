@@ -1,3 +1,5 @@
+module.exports.work = function() {
+	return `
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -91,3 +93,5 @@
 </body>
 
 </html>
+`;
+}
