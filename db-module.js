@@ -32,5 +32,5 @@ module.exports = {
                 callback(row);
         });
         conn.end();
-    },
+    }
 }

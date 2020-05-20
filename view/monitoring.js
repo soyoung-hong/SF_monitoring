@@ -52,7 +52,7 @@ module.exports.monitoring = function() {
             <li class="nav-item">
               <img src="userimg.PNG" alt="logo" style="width:50px;">
               <div class="navbar-text">
-                <p class="text-dark">작업자 : _______ </p>
+                <p class="text-dark" name="username">작업자 : _______ </p>
               </div>
             </li>
             <li class="nav-item">

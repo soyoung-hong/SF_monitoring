@@ -80,9 +80,8 @@ module.exports.login = function() {
               <form action="/user/login" class="form-horizontal" method="POST">
                 <div class="total">
                   <div class="login">
-                    <input type="text" class="form-control" id ="uid" name="uid" placeholder="User number" >
+                    <input type="text" class="form-control" id ="uid" name="usernumber" placeholder="User number" >
                   </div>
-
                   <div class="login">
                     <button type="submit" value="로그인" class="form-control btn btn-primary">로그인</button>
                     
