@@ -4,11 +4,12 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const alert = require('./view/alertMsg');
 const dbModule = require('./db-module');
+const template = require('./view/template');
 /*const sm = require('./serial-module') */
 
 
 const app = express();
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 const userRouter = require('./userRouter');
 
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js')); // redirect bootstrap JS
@@ -21,20 +22,32 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    store: new FileStore({logFn: function(){}})
+    store: new FileStore({ logFn: function () { } })
 }));
 app.use('/user', userRouter);
 
-app.get('/monitoring', function(req, res) {
-
-        let view = require('./view/monitoring');
-        let html = view.monitoring();
+app.get('/monitoring', function (req, res) {
+    if (req.session.usernumber === undefined) {
+        let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
         res.send(html);
+    } else {
+        let navBar = template.navBar(req.session.name);
+        let view = require('./view/monitoring');
+        let html = view.monitoring(navBar);
+        res.send(html);
+
+    }
 });
-app.get('/work', function(req, res) {
-    let view = require('./view/work');
-    let html = view.work();
-    res.send(html);
+app.get('/work', function (req, res) {
+    if (req.session.usernumber === undefined) {
+        let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
+        res.send(html);
+    } else {
+        let navBar = template.navBar(req.session.name);
+        let view = require('./view/work');
+        let html = view.work(navBar);
+        res.send(html);
+    }
 });
 
 app.get('*', function (req, res) {
