@@ -31,11 +31,14 @@ app.get('/monitoring', function (req, res) {
         let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
         res.send(html);
     } else {
-        let navBar = template.navBar(req.session.name);
-        let view = require('./view/monitoring');
-        let html = view.monitoring(navBar);
-        res.send(html);
+        dbModule.getSensor(function(sensor){
+            let navBar = template.navBar(req.session.name);
+            let view = require('./view/monitoring');
+            let html = view.monitoring(navBar, sensor);
 
+
+            res.send(html);
+        });
     }
 });
 app.get('/work', function (req, res) {

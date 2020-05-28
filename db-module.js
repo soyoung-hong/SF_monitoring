@@ -4,7 +4,7 @@ const data = fs.readFileSync(__dirname + '/public/mysqlConf.json');
 const conf = JSON.parse(data);
 
 module.exports = {
-    getConnection:     function() {
+    getConnection: function () {
         const connection = mysql.createConnection({
             host: conf.host,
             user: conf.user,
@@ -12,7 +12,7 @@ module.exports = {
             port: conf.port,
             database: conf.database
         });
-        connection.connect(function(err) {
+        connection.connect(function (err) {
             if (err) {
                 console.log('mysql connection error :' + err);
             } else {
@@ -21,11 +21,22 @@ module.exports = {
         });
         return connection;
     },
-    getUserInfo:    function(uid, callback) {
+    getUserInfo: function (uid, callback) {
         const conn = this.getConnection();
         const sql = 'select * from user where uid = ?';   // DATE_FORMAT(createdDate, '%Y-%m-%d %T')
 
-        conn.query(sql, uid, function(err, row) {
+        conn.query(sql, uid, function (err, row) {
+            if (err)
+                console.log(err);
+            else
+                callback(row);
+        });
+        conn.end();
+    },
+    getSensor: function (callback) {
+        const conn = this.getConnection();
+        const sql = `SELECT * FROM sensor ORDER BY sensorid DESC LIMIT 1`;
+        conn.query(sql, function (err, row) {
             if (err)
                 console.log(err);
             else
