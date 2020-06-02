@@ -33,6 +33,19 @@ module.exports = {
         });
         conn.end();
     },
+    getUsers:  function( callback) {
+        const conn = this.getConnection();
+        
+        const sql = `SELECT * from user`;   // limit offset, 갯수
+
+        conn.query(sql, function(err, rows) {
+            if (err)
+                console.log(err);
+            else
+                callback(rows);
+        });
+        conn.end();
+    },
     getSensor: function (callback) {
         const conn = this.getConnection();
         const sql = `SELECT * FROM sensor ORDER BY sensorid DESC LIMIT 1`;
@@ -41,6 +54,20 @@ module.exports = {
                 console.log(err);
             else
                 callback(row);
+        });
+        conn.end();
+    },
+    insertSensor: function(temperature, humidity, air, illuminance, callback) {
+        const conn = this.getConnection();        
+        const sql = `INSERT INTO sensor (temperature, humidity, air, illuminance) VALUES (?,?,?,?)`;
+        let params = [temperature, humidity, air, illuminance];
+        console.log(params);
+        conn.query(sql, params, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                callback();
+            }
         });
         conn.end();
     }

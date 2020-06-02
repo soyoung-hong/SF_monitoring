@@ -11,7 +11,7 @@ router.post('/login', function(req, res) {
             console.log(`${uid} login 성공`);
             req.session.usernumber = uid;
             req.session.name = user[0].name;
-            let html = alert.alertMsg(`${user[0].name} 님 환영합니다.`, '/monitoring');
+            let html = alert.alertMsg(`${user[0].name} 님 환영합니다.`, '/work');
             res.send(html);
 
         } else if (user[0] === undefined)  {   
@@ -21,9 +21,9 @@ router.post('/login', function(req, res) {
         }
     });
 });
+
 router.get('/logout', function(req, res) {
     req.session.destroy();
     res.redirect('/');    
 });
-
 module.exports = router;

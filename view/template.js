@@ -4,12 +4,12 @@ module.exports = {
         <nav class="navbar navbar-expand-sm navbar-light bg-faded">
 
         <!-- Brand -->
-        <a class="navbar-brand" href="/monitoring">모니터링</a>
+        <a class="navbar-brand" href="/work">작입지시</a>
   
         <!-- Links -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="/work">업무관리</a>
+            <a class="nav-link" href="/monitoring">모니터링</a>
           </li>
           <!-- Dropdown -->
           <li class="nav-item dropdown">
@@ -23,6 +23,15 @@ module.exports = {
               <a class="dropdown-item" href="#lx">조도</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              작업자
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/admin">작업시지</a>
+            </div>
+          </li>
+
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">

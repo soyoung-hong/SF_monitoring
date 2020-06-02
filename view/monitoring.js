@@ -3,6 +3,7 @@ const navBar = template.navBar();
 
 module.exports.monitoring = function(navBar, sensor) {
   
+  
 	return `
     <!DOCTYPE html>
     <html lang="ko">
@@ -36,7 +37,8 @@ module.exports.monitoring = function(navBar, sensor) {
               <div class="card bg-light">
                 <div class="card-body text-center">
                     <h1><span class="badge badge-secondary">온도</span><span style="color:rgb(236, 99, 75)">
-                        <i class="fas fa-thermometer-half" aria-hidden="true"></i></span></h1><br>
+                        
+                    <i class="fas fa-thermometer-half" aria-hidden="true"></i></span></h1><br>
                         <span class="face" style="color:rgb(8, 224, 152)"><i class="far fa-laugh fa-8x"></i></span><br>
                         <p></p>
                         <h1 class="text-center display-4">${sensor[0].temperature}°C</h1>
