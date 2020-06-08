@@ -22,7 +22,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: new FileStore({ logFn: function () { } })
 }));
 app.use('/user', userRouter);

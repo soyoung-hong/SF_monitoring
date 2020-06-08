@@ -23,13 +23,16 @@ module.exports = {
     },
     getUserInfo: function (uid, callback) {
         const conn = this.getConnection();
-        const sql = 'select * from user where uid = ?';   // DATE_FORMAT(createdDate, '%Y-%m-%d %T')
+        const sql = 'select * from user where uid=?';   // DATE_FORMAT(createdDate, '%Y-%m-%d %T')
 
         conn.query(sql, uid, function (err, row) {
             if (err)
                 console.log(err);
             else
+            {
+   
                 callback(row);
+            }
         });
         conn.end();
     },
@@ -43,6 +46,32 @@ module.exports = {
                 console.log(err);
             else
                 callback(rows);
+        });
+        conn.end();
+    },
+    registerUser:    function(params, callback) {
+        const conn = this.getConnection();
+        const sql = `insert into user(uid, name) values (?, ?)`;
+
+        conn.query(sql, params, function(err, result) {
+            if (err)
+                console.log(err);
+            else {
+                console.log('registerUser(),', result);
+                callback();
+            }
+        });
+        conn.end();
+    },
+    updateUser: function(params, callback) {
+        const conn = this.getConnection();
+        const sql = `update user set deptId = ?, text = ? where uid = ?`;
+
+        conn.query(sql, params, function(err, result) {
+            if (err)
+                console.log(err);
+            else
+                callback();
         });
         conn.end();
     },
