@@ -30,13 +30,12 @@ module.exports = {
                 console.log(err);
             else
             {
-   
                 callback(row);
             }
         });
         conn.end();
     },
-    getUsers:  function( callback) {
+    getUsers:  function(callback) {
         const conn = this.getConnection();
         
         const sql = `SELECT * from user`;   // limit offset, 갯수
@@ -63,11 +62,23 @@ module.exports = {
         });
         conn.end();
     },
+
     updateUser: function(params, callback) {
         const conn = this.getConnection();
         const sql = `update user set deptId = ?, text = ? where uid = ?`;
 
         conn.query(sql, params, function(err, result) {
+            if (err)
+                console.log(err);
+            else
+                callback();
+        });
+        conn.end();
+    },
+    deleteUser: function(uid, callback) {
+        const conn = this.getConnection();
+        const sql = `DELETE FROM user WHERE uid=? `;
+        conn.query(sql, uid, function(err, result) {
             if (err)
                 console.log(err);
             else

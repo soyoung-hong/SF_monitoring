@@ -11,7 +11,8 @@ router.post('/login', function (req, res) {
             console.log(`${uid} login 성공`);
             req.session.usernumber = uid;
             req.session.name = user[0].name;
-            let html = alert.alertMsg(`${user[0].name} 님 환영합니다.`, '/work');
+            let url = `/work/uid/${user[0].uid}`
+            let html = alert.alertMsg(`${user[0].name} 님 환영합니다.`, url);
             res.send(html);
 
         } else if (user[0] === undefined) {
@@ -23,10 +24,11 @@ router.post('/login', function (req, res) {
 });
 router.get('/register', function(req, res) {    // 관리자로 로그인해야 할 수 있음.
     if (req.session.usernumber !== 0) {
-        let html = alert.alertMsg(`권한이 없습니다.`, '/work');
+        let url = `/work/uid/${req.session.usernumber}`
+        let html = alert.alertMsg(`권한이 없습니다.`, url);
         res.send(html);
     } else {
-            let navBar = template.navBar(req.session.name);
+            let navBar = template.navBar(req.session.name, req.session.uid);
             let view = require('./view/registerUser');
             let html = view.registerUser(navBar);
             res.send(html);  
@@ -50,14 +52,15 @@ router.post('/register', function(req, res) {
 });
 });
 
-router.get('/update/uid/:uid', function (req, res) {     // 본인 것만 수정할 수 있음.
+router.get('/update/uid/:uid', function (req, res) {    
 
     if (req.session.usernumber !== 0) {
-        let html = alert.alertMsg(`권한이 없습니다.`, '/work');
+        let url = `/work/uid/${user[0].uid}`
+        let html = alert.alertMsg(`권한이 없습니다.`, url);
         res.send(html);
     } else {
         dbModule.getUserInfo(req.params.uid, function (user) {
-            let navBar = template.navBar(req.session.name);
+            let navBar = template.navBar(req.session.name, req.session.uid);
             let view = require('./view/updateUser');
             let html = view.updateUser(navBar, user);
             res.send(html);
@@ -78,7 +81,26 @@ dbModule.getUserInfo(uid, function(user){
     });
 });
 });
-
+router.get('/delete/uid/:uid', function(req, res) {     // 관리자로 로그인해야 할 수 있음.
+    if (req.session.usernumber !== 0) {
+        
+        let html = alert.alertMsg(`권한이 없습니다.`, '/');
+        res.send(html);
+    }  else {
+        dbModule.getUserInfo(req.params.uid, function (user) {
+            let navBar = template.navBar(req.session.name, req.session.uid);
+            let view = require('./view/deleteUser');
+            let html = view.deleteUser(navBar, user);  
+            res.send(html);
+        });
+    }
+});
+router.post('/delete', function(req, res) {
+    let uid = req.body.uid;
+    dbModule.deleteUser(uid, function() {
+        res.redirect(`/admin`);
+    });
+});
 
 
 router.get('/logout', function (req, res) {

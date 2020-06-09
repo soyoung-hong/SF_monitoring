@@ -40,7 +40,7 @@ app.get('/monitoring', function (req, res) {
             illuminance = body.cds;
             dbModule.insertSensor(temperature, humidity, air, illuminance, function () {
                 dbModule.getSensor(function (sensor) {
-                    let navBar = template.navBar(req.session.name);
+                    let navBar = template.navBar(req.session.name, req.session.uid);
                     let view = require('./view/monitoring');
                     let html = view.monitoring(navBar, sensor);
                     res.send(html);
@@ -61,24 +61,27 @@ app.get('/monitoring', function (req, res) {
     }
     */
 });
-app.get('/work', function (req, res) {
+app.get('/work/uid/:uid', function (req, res) {
     if (req.session.usernumber === undefined) {
         let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
         res.send(html);
     } else {
-        let navBar = template.navBar(req.session.name);
-        let view = require('./view/work');
-        let html = view.work(navBar);
-        res.send(html);
+        dbModule.getUserInfo(req.params.uid, function (user){
+            let navBar = template.navBar(req.session.name, req.params.uid);
+            let view = require('./view/work');
+            let html = view.work(navBar, user);
+            res.send(html);
+        });
     }
 });
 app.get('/admin', function(req, res) {        // 로그인만 하면 누구나 할 수 있음.
     if (req.session.usernumber !== 0) {
-        let html = alert.alertMsg(`권한이 없습니다.`, '/work');
+        let url = `/work/uid/${req.session.usernumber}`
+        let html = alert.alertMsg(`권한이 없습니다.`, url);
         res.send(html);
     } else {
         dbModule.getUsers(function(user) {
-            let navBar = template.navBar(req.session.name);
+            let navBar = template.navBar(req.session.name, req.params.uid);
             let view = require('./view/admin');
             let html = view.admin(navBar,user);
             res.send(html);
@@ -86,7 +89,42 @@ app.get('/admin', function(req, res) {        // 로그인만 하면 누구나 �
         });
     }
 });
+app.get('/temp', function (req, res) {
+    if (req.session.usernumber === undefined) {
+        let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
+        res.send(html);
+    } else {
+        let navBar = template.navBar(req.session.name, req.session.usernumber);
 
+        let view = require('./view/temp');
+        let html = view.work(navBar, req.session.deptId);
+        res.send(html);
+    }
+});
+app.get('/air', function (req, res) {
+    if (req.session.usernumber === undefined) {
+        let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
+        res.send(html);
+    } else {
+        let navBar = template.navBar(req.session.name, req.session.usernumber);
+
+        let view = require('./view/air');
+        let html = view.work(navBar, req.session.deptId);
+        res.send(html);
+    }
+});
+app.get('/lux', function (req, res) {
+    if (req.session.usernumber === undefined) {
+        let html = alert.alertMsg('시스템을 사용하려면 먼저 로그인하세요.', '/');
+        res.send(html);
+    } else {
+        let navBar = template.navBar(req.session.name, req.session.usernumber);
+
+        let view = require('./view/lux');
+        let html = view.work(navBar, req.session.deptId);
+        res.send(html);
+    }
+});
 app.get('*', function (req, res) {
     res.status(404).send('File not found');
 });

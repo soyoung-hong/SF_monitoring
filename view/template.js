@@ -1,5 +1,6 @@
 module.exports = {
-    navBar: function(name) {
+    navBar: function(name, uid) {
+      console.log(uid);
         return `
         <head>
         <title>Bootstrap 4 Website Example</title>
@@ -19,7 +20,7 @@ module.exports = {
         <nav class="navbar navbar-expand-sm navbar-light bg-faded">
 
         <!-- Brand -->
-        <a class="navbar-brand" href="/work">작입지시</a>
+        <a class="navbar-brand" href="/work/uid/${uid}">작입지시</a>
   
         <!-- Links -->
         <ul class="navbar-nav">
@@ -32,10 +33,9 @@ module.exports = {
               센서
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#temp">온도</a>
-              <a class="dropdown-item" href="#hum">습도</a>
-              <a class="dropdown-item" href="#air">공기질</a>
-              <a class="dropdown-item" href="#lx">조도</a>
+              <a class="dropdown-item" href="/temp">온습도</a>
+              <a class="dropdown-item" href="/air">공기질</a>
+              <a class="dropdown-item" href="/lux">조도</a>
             </div>
           </li>
           <li class="nav-item dropdown">

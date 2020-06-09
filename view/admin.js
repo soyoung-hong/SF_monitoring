@@ -9,7 +9,8 @@ module.exports.admin = function (navBar,userObj) {
                 <td>${user.name}</td>
                 <td>${user.deptId}</td>
                 <td>${user.text}</td>
-                <td><a href="/user/update/uid/${user.uid}"><i class="fas fa-edit"></i></a>
+                <td><a href="/user/update/uid/${user.uid}"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a href="/user/delete/uid/${user.uid}"><i class="fas fa-trash-alt"></i></td>
             </tr>`;
     }
     return `

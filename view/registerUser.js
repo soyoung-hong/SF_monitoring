@@ -2,7 +2,6 @@ const template = require('./template');
 
 module.exports.registerUser = function (navBar) {
 
-    let deptList = ['A', 'B', 'C','D','E','F','X'];
 
     return `
     <!DOCTYPE html>
