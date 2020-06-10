@@ -40,7 +40,7 @@ app.get('/monitoring', function (req, res) {
             illuminance = body.cds;
             dbModule.insertSensor(temperature, humidity, air, illuminance, function () {
                 dbModule.getSensor(function (sensor) {
-                    let navBar = template.navBar(req.session.name, req.session.uid);
+                    let navBar = template.navBar(req.session.name, req.session.usernumber);
                     let view = require('./view/monitoring');
                     let html = view.monitoring(navBar, sensor);
                     res.send(html);
