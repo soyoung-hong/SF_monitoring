@@ -43,10 +43,11 @@ module.exports.work = function (navBar, user) {
                             <h4 class="card-text">${user[0].text}</h4>
                         </div>
                     </div>
-                </div>
-
-            </div>
-        </div>
+                    </div>
+                    
+             
+                    </div>
+                    </div>
     </div>
 </body>
 

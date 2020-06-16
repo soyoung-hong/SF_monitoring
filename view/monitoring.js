@@ -12,10 +12,11 @@ const AIR_HIGH = 30.0;
 const good = `<span style="color:rgb(8, 224, 152)"><i class="far fa-grin-hearts fa-8x"></i></span>`;
 const up = `<span style="color:red"><i class="fas fa-angle-double-up fa-8x"></i></span>`;
 const down = `<span style="color:blue"><i class="fas fa-angle-double-down fa-8x"></i></span>`;
-  
-module.exports.monitoring = function(navBar, sensor) {
+
+module.exports.monitoring = function (navBar, sensor) {
   let temp = sensor[0].temperature;
   let humid = sensor[0].humidity;
+
   let cds = sensor[0].illuminance;
   let air = sensor[0].air;
 
@@ -33,7 +34,7 @@ module.exports.monitoring = function(navBar, sensor) {
   if (air > AIR_HIGH) airSign = up;
   else if (air < AIR_LOW) airSign = down;
   else airSign = good;
-	return `
+  return `
     <!DOCTYPE html>
     <html lang="ko">
     
@@ -92,7 +93,11 @@ module.exports.monitoring = function(navBar, sensor) {
     
                 </div>
               </div>  
-            </div>
+            </div>   
+              <div class="btn float-right">
+               <button type="submit" class="btn btn-outline-info">재측정</button>
+              </div>
+
           </div>
     </body>
     

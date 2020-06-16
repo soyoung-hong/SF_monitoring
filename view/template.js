@@ -43,7 +43,7 @@ module.exports = {
               작업자
             </a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="/admin">작업 시지</a>
+              <a class="dropdown-item" href="/admin">작업 지시</a>
               <a class="dropdown-item" href="/user/register">작업자 등록</a>
 
             </div>
