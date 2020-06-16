@@ -56,7 +56,7 @@ module.exports.work = function (navBar) {
               <td>4. LED 고장 시 12 OR 13번 핀 확인 / 핀 문제 없다면 회로도를 확인하여 LED 교체  </td>
             </tr>
               <tr>
-                <td>4. 관리자 문의</td>
+                <td>5. 관리자 문의</td>
               </tr>
             </tbody>
           </table>

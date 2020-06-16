@@ -19,20 +19,20 @@ module.exports.work = function (navBar, user) {
                 <div class="col-4">
                     <h1 class="text-center"><span class="badge badge-pill badge-info">공정구역</span></h1>
                     <hr style="border:solid 2px palevioletred">
-                    <img src="/${user[0].deptId}.PNG" width="350px‬" alt="logo">
+                    <img src="/${user[0].deptId}.PNG" width="100%‬" alt="logo">
                 </div>
                 <div class="col-4">
-                    <div class="card bg-info" style="margin-top:50px;">
+                    <div class="card" style="margin-top:50px;">
                         <div class="card-body text-center">
-                        <h2 class="card-text">"${user[0].deptId}" 파트구역</h2>
-
-                        
-                        <h3 class="card-text"> A : 생산 공정.</h2>
-                        <h3 class="card-text"> B : 확장 공정.</h2>
-                        <h3 class="card-text"> C : 축소 공정</h2>
-                        <h3 class="card-text"> D : 폐기 공정</h2>
-                        <h3 class="card-text"> E : 저장 공정</h2>   
-                        <h3 class="card-text"> F : 조립 공정</h2>
+                        <ul class="list-group">
+                        <li class="list-group-item active bg-white"><h2 class="text-primary">"${user[0].deptId}" 파트구역</h2></li>
+                        <li class="list-group-item">A : 생산 공정</li>
+                        <li class="list-group-item">B : 확장 공정</li>
+                        <li class="list-group-item">C : 축소 공정</li>
+                        <li class="list-group-item">D : 폐기 공정</li>
+                        <li class="list-group-item">E : 저장 공정</li>
+                        <li class="list-group-item">F : 조립 공정</li>
+                      </ul>
                         </div>
                     </div>
                 </div>
