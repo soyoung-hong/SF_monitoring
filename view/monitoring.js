@@ -95,12 +95,16 @@ module.exports.monitoring = function (navBar, sensor) {
               </div>  
             </div>   
               <div class="btn float-right">
-               <button type="submit" class="btn btn-outline-info">재측정</button>
+               <button type="button" class="btn btn-outline-info" onclick="refresh()">재측정</button>
               </div>
 
           </div>
     </body>
-    
+    <script>
+      function refresh() {
+        location.reload();
+      }
+    </script>
     </html>
 
 `;
